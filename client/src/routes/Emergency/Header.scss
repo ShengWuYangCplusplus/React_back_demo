@@ -1,0 +1,29 @@
+.header-container{
+    width: 100%;
+    display: flex;
+    flex-flow: row;
+    justify-content: space-between;
+    align-items: center;
+    line-height: 80px;
+    color: whitesmoke;
+    padding-left: 20px;
+    padding-right: 20px;
+    border-bottom: 0.5px solid lightskyblue;
+    .back{
+        width: 200px;
+    }
+    .title{
+        flex:1;
+        font-size: 32px;
+        // font-weight: bold;
+        color: lightskyblue;
+        display: flex;
+        justify-content: center;
+        letter-spacing: 4px;
+    }
+    .time{
+        width: 200px;
+        font-size: 16px;
+        color: rgb(134, 204, 248);
+    }
+}

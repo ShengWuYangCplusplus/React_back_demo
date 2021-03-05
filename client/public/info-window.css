@@ -1,0 +1,42 @@
+ .amap-info-content{
+    padding:0px !important;
+}
+.amap-info-outer, .amap-menu-outer{
+    border-radius:  20px !important;
+}
+.infoContainer{
+    background-color: #061731;
+    color:grey;
+}
+.infowindow-title{
+    padding-left: 10px;
+    color:orange;
+    font-weight: bold;
+    height: 30px;
+    /* background-color: lightgrey; */
+    padding: 5px;
+    font-size: 14px;
+}
+.infowindow-content{
+    padding:10px;
+    color:orangered;
+    /* background-color: #FAF0E6; */
+}
+.infowindow-content span{
+    display: block;
+    font-size: 13px;
+    height: 25px;
+    line-height: 25px;
+}
+.infowindow-address ,.infowindow-time{
+    color:white;
+}
+.infowindow-level{
+    color:lightskyblue;
+}
+.travel-img{
+    width:auto;height:150px
+}
+.build-img{
+    width:auto;height: 60px;
+}

@@ -1,0 +1,22 @@
+.userinfo{
+    .ant-upload{
+        cursor: pointer !important;
+    }
+    .ant-upload :hover{
+            .ant-avatar > img{
+                filter: blur(2px) !important;
+            }
+        }
+        .ant-avatar-lg{
+            width: 100px;
+            height: 100px;
+            line-height: 100px;
+        }
+    .oneRow{
+        margin-top: 10px;
+    }
+    .ant-upload-list{
+        display: none;
+    }
+    
+}

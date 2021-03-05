@@ -1,0 +1,140 @@
+#!/usr/bin/env node
+
+/**
+ * Module dependencies.
+ */
+
+var app = require('../app');
+var debug = require('debug')('jwt:server');
+var http = require('http');
+
+/**
+ * Get port from environment and store in Express.
+ */
+
+var port = normalizePort(process.env.PORT || '7788');
+app.set('port', port);
+
+/**
+ *  Mongodb
+ */
+var MongoClient = require("mongodb").MongoClient;
+var ObjectID = require("mongodb").ObjectID;
+const { mongodbUrl } = require("../config/mongodbConfig.js");
+/**
+ * Create HTTP server.
+ */
+var users = []
+var server = http.createServer(app);
+var io = require('socket.io').listen(server);
+
+io.sockets.on('connection', (socket) => {
+  // 失去连接
+  socket.on('disconnect', function () {
+    if (users.indexOf(socket.username) > -1) {
+      users.splice(users.indexOf(socket.username), 1);
+      console.log(socket.username + '===>disconnected');
+    }
+
+    socket.broadcast.emit('users', { number: users.length });
+  });
+
+  socket.on('message', function (data) {
+    MongoClient.connect(
+      mongodbUrl,
+      { useNewUrlParser: true, useUnifiedTopology: true },
+      (err, db) => {
+        if (err) reject("db connect error");
+        var dbo = db.db("runoob");
+        dbo.collection("messages").insertOne(data, (err, result) => {
+          if (err) reject("db execute error");
+          db.close();
+        });
+      }
+    );
+    let newData = { text: data.text, user: socket.username,avatar:data.avatar }
+    socket.emit('receive_message', newData);
+    socket.broadcast.emit('receive_message', newData);
+  });
+  socket.on('login', function (data) {
+    if (users.indexOf(data.username) > -1) {
+
+    } else {
+      socket.username = data.username;
+      users.push(data.username);
+      // 统计连接数
+      socket.emit('users', { number: users.length });  // 发送给自己
+      socket.broadcast.emit('users', { number: users.length }); // 发送给其他人
+    }
+
+  });
+
+});
+
+/**
+ * Listen on provided port, on all network interfaces.
+ */
+
+server.listen(port);
+server.on('error', onError);
+server.on('listening', onListening);
+
+/**
+ * Normalize a port into a number, string, or false.
+ */
+
+function normalizePort(val) {
+  var port = parseInt(val, 10);
+
+  if (isNaN(port)) {
+    // named pipe
+    return val;
+  }
+
+  if (port >= 0) {
+    // port number
+    return port;
+  }
+
+  return false;
+}
+
+/**
+ * Event listener for HTTP server "error" event.
+ */
+
+function onError(error) {
+  if (error.syscall !== 'listen') {
+    throw error;
+  }
+
+  var bind = typeof port === 'string'
+    ? 'Pipe ' + port
+    : 'Port ' + port;
+
+  // handle specific listen errors with friendly messages
+  switch (error.code) {
+    case 'EACCES':
+      console.error(bind + ' requires elevated privileges');
+      process.exit(1);
+      break;
+    case 'EADDRINUSE':
+      console.error(bind + ' is already in use');
+      process.exit(1);
+      break;
+    default:
+      throw error;
+  }
+}
+
+/**
+ * Event listener for HTTP server "listening" event.
+ */
+
+function onListening() {
+  var addr = server.address();
+  var bind = typeof addr === 'string'
+    ? 'pipe ' + addr
+    : 'port ' + addr.port;
+  debug('Listening on ' + bind);
+}

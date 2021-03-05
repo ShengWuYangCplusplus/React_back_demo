@@ -1,0 +1,10 @@
+.ant-table-pagination.ant-pagination{
+    float: left !important;
+    padding-left: 20px;
+}
+.amap-info-contentContainer.bottom-center{
+  opacity: 0.7;
+}
+.ant-table-pagination.ant-pagination{
+  display: block !important;
+}

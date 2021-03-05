@@ -1,0 +1,41 @@
+.screenwindow{
+    background-color: #061731;
+    color:grey;
+    border: 1px solid #01FFF5;
+    height: 180px;
+    width: 320px;
+}
+.screenwindow-title{
+    padding-left: 10px;
+    color:white;
+    height: 30px;
+    padding: 5px;
+    font-size: 18px;
+}
+.screenwindow-content{
+    padding:10px;
+    color:orangered;
+}
+.screenwindow-content span{
+    display: block;
+    font-size: 13px;
+    height: 25px;
+    line-height: 25px;
+}
+.screenwindow-address ,.screenwindow-time{
+    color:white;
+}
+.infowindow-level{
+    color:lightskyblue;
+}
+.screenwindow-img{
+    width:auto;height:150px
+}
+.screenwindow-img{
+    width:auto;height: 60px;
+}
+.screenwindow-detail{
+    width:100px;
+    height: 30px;
+    background-color: white;
+}

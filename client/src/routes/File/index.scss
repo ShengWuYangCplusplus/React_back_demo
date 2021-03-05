@@ -1,0 +1,30 @@
+.file{
+    background-color: white;
+    padding:20px;
+    .ant-upload-list{
+        display: none;
+    }
+}
+#result{
+    overflow-y: scroll;
+    table {
+	    border-collapse: collapse;
+	}
+	th, td {
+	    border: solid 1px #6D6D6D;
+	    padding: 5px 10px;
+	}
+	.mt-sm {margin-top: 8px;}
+	body {
+		background: #f4f4f4;
+		padding: 0;
+		margin: 0;
+	}
+	.container {
+		width: 1024px;
+		margin: 0 auto;
+		background: #fff;
+		padding: 20px;
+		min-height: 100vh;
+	}
+}
